@@ -1,0 +1,66 @@
+---
+title: "Untitled"
+author: "Xuecheng Zhang(915942842)"
+date: "4/12/2020"
+output: html_document
+---
+
+```{r}
+#import packages
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(GGally)
+library(gridExtra)
+library(factoextra)
+library(FactoMineR)
+```
+
+
+```{r}
+#rename column and correcting data type
+seed <- read.csv("~/Desktop/学习资料/2020 spring/sta160/project 1/seed.csv")
+Auto <- read.csv("~/Desktop/学习资料/2020 spring/sta160/project 1/Auto.csv")
+seed$Wheat<-as.factor(seed$Wheat)
+```
+
+for seed data:
+
+```{r}
+catnum <- function(data, x, y){
+  ggplot(data, aes_string(x = y, y = x)) +
+    geom_boxplot(aes_string(col = y), outlier.shape = 21, outlier.fill = NULL, show.legend = F) +
+    theme_classic() + scale_color_brewer(palette = "Set1")}
+a <- catnum(seed, "Aera", "Wheat")
+b <- catnum(seed, "Perimeter", "Wheat")
+c <- catnum(seed, "Compactness", "Wheat")
+d <- catnum(seed, "Length", "Wheat")
+e <- catnum(seed, "Width", "Wheat")
+f <- catnum(seed, "Coefficient", "Wheat")
+g <- catnum(seed, "Groove", "Wheat")
+
+grid.arrange(a,b,c,d,e,f,g, ncol=3)
+
+```
+
+```{r message=TRUE, warning=FALSE}
+ggpairs(seed[,c(1:7)], showStrips = F) + 
+  theme(axis.text = element_text(colour = "blue", size = 11),
+        strip.background = element_rect(fill = "#d63d2d"),
+        strip.text = element_text(colour = "white", size = 12,
+                                  face = "bold"))
+```
+
+
+```{r}
+my_a = 0
+my_b = 0
+for i in range(len(mat)):
+        if(is_equal((a[mat[i][0]],a[mat[i][1]])) == is_equal((b[mat[i][0]],b[mat[i][1]])) 
+            and is_equal((b[mat[i][0]],b[mat[i][1]])) == True):
+            my_a += 1
+        if(is_equal((a[mat[i][0]],a[mat[i][1]])) == is_equal((b[mat[i][0]],b[mat[i][1]])) 
+            and is_equal((b[mat[i][0]],b[mat[i][1]])) == False):
+            my_b += 1
+```
+
